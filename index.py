@@ -1,11 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 import configparser
+import os
 
 def get_url_from_config():
     #Functia acceseaza fisierul config.ini si preia URL-ul prezent, returnand-ul
     config = configparser.ConfigParser()
-    config_path = "D:/VSCODES/TemaPY/config.ini"
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(current_dir, 'config.ini')
     config.read(config_path)
     return config['URL']['url']
 
@@ -99,8 +101,10 @@ def main():
         title, description = extract_page_info(html_content)
         print(f"Titlu: {title}")
         print(f"Descriere meta: {description}")
-    config_path = "D:/VSCODES/TemaPY/config.ini"
+        
     config = configparser.ConfigParser()
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(current_dir, 'config.ini')
     config.read(config_path)
     url = config['OLX']['url']
     search_keywords = config['OLX']['search_keywords']
